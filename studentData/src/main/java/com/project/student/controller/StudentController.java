@@ -1,8 +1,8 @@
 package com.project.student.controller;
 
-import com.project.student.College.clgDto.CollegeDTO;
-import com.project.student.dept.deptDto.DepartmentDTO;
+import com.project.student.dto.DepartmentDTO;
 import com.project.student.dto.StudentDTO;
+import com.project.student.entity.Department;
 import com.project.student.entity.Student;
 import com.project.student.serviceImpl.StudentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,17 +16,15 @@ import java.util.List;
 public class StudentController {
     @Autowired
     private StudentServiceImpl studentServiceImpl;
-
-
+/*
     @PostMapping("/student/save")
     public ResponseEntity<Student> saveStudent(@RequestBody StudentDTO studentDTO){
         Student result=studentServiceImpl.saveStudent(studentDTO);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
-    @PutMapping("update/{dId}")
-    public ResponseEntity<Student> updateStudent(@RequestBody StudentDTO dto, @PathVariable Integer Id, @RequestBody Integer dId, @RequestBody Integer clgId){
-
-        Student result=impl1.updateStudent(dto,Id,dId,clgId);
+    @PutMapping("/student/update")
+    public ResponseEntity<Student> updateStudent(@RequestBody StudentDTO studentDTO){
+        Student result=studentServiceImpl.updateStudent(dto,Id,dId,clgId);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
     @GetMapping("get")
@@ -39,50 +37,27 @@ public class StudentController {
         impl1.deleteStudent(dId);
         return  ResponseEntity.status(HttpStatus.OK).body("deleted");
     }
-    @PostMapping("save")
-    public ResponseEntity<Dept> saveDept(@RequestBody DepartmentDTO dto){
-        Dept result=impl.saveDept(dto);
+
+ */
+    @PostMapping("/save/department")
+    public ResponseEntity<Department> saveDepartment(@RequestBody DepartmentDTO departmentDTO){
+        Department result=studentServiceImpl.saveDepartment(departmentDTO);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
-    @PutMapping("update/{dId}")
-    public ResponseEntity<Dept> updateDept(@RequestBody DepartmentDTO dto, @PathVariable Integer dId){
-
-        Dept result=impl.updateDept(dto,dId);
+    @PutMapping("/update/department")
+    public ResponseEntity<Department> updateDepartment(@RequestBody DepartmentDTO departmentDTO){
+        Department result=studentServiceImpl.updateDepartment(departmentDTO);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
-    @GetMapping("get")
-    public List<Dept> getClg(){
-        List<Dept> result=impl.getDept();
-        return (List<Dept>) ResponseEntity.status(HttpStatus.OK).body(result);
-    }
-    @DeleteMapping("delete{dId}")
-    public ResponseEntity<String> deleteClg(@PathVariable Integer dId){
-        impl.deleteDept(dId);
-        return  ResponseEntity.status(HttpStatus.OK).body("deleted");
-    }
-    @PostMapping("save")
-    public ResponseEntity<Clg> saveClg(@RequestBody CollegeDTO dto){
-        Clg result=impl.saveClg(dto);
+    @GetMapping("/department-list")
+    public ResponseEntity<List<Department>> getAllDepartments(){
+        List<Department> result=studentServiceImpl.getAllDepartment();
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
-    @PutMapping("update/{clgId}")
-    public ResponseEntity<Clg> updateClg(@RequestBody CollegeDTO dto, @PathVariable Integer clgId){
-
-        Clg result=impl.updateClg(dto,clgId);
+    @DeleteMapping("/delete-department/{id}")
+    public ResponseEntity<String> deleteDepartmentById(@PathVariable Integer id){
+        studentServiceImpl.deleteDepartment(id);
+        String result=id+" deleted successfully.";
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
-
-    @GetMapping("get")
-    public List<Clg> getClg(){
-        List<Clg> result=impl.getClg();
-        return (List<Clg>) ResponseEntity.status(HttpStatus.OK).body(result);
-    }
-    @DeleteMapping("delete/{dId}")
-    public ResponseEntity<String> deleteClg(@PathVariable Integer dId){
-        impl.deleteClg(dId);
-        return  ResponseEntity.status(HttpStatus.OK).body("deleted");
-    }
-
-
-
 }

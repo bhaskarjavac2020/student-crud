@@ -1,5 +1,6 @@
 package com.project.student.serviceImpl;
 
+import com.project.student.dto.DepartmentDTO;
 import com.project.student.dto.StudentDTO;
 import com.project.student.entity.Department;
 import com.project.student.entity.Student;
@@ -11,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class StudentServiceImpl implements StudentService {
     @Autowired
@@ -19,6 +22,7 @@ public class StudentServiceImpl implements StudentService {
     private DepartmentRepository departmentRepository;
     @Autowired
     private CollegeRepository collegeRepository;
+    /*
     // save
     @Override
     public Student saveStudent(StudentDTO studentDTO) {
@@ -35,6 +39,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     //update
+    @Override
     public Student updateStudent(StudentDTO dto, Integer Id, Integer dId, Integer clgId){
         Student s = repo.findById(Id).get();
 
@@ -60,35 +65,45 @@ public class StudentServiceImpl implements StudentService {
         repo.deleteById(dId);
     }
 
-    @Autowired
-    private DepartmentRepository repo;
+*/
     // save
     @Override
-    public Dept saveDept(DepartmentDTO dto) {
-        Dept dept = new Dept();
-        dept.setDName(dto.getDName());
-        return repo.save(dept);
+    public Department saveDepartment(DepartmentDTO departmentDTO) {
+        Department dept = departmentRepository.findByName(departmentDTO.getDepartmentName());
+        Department department=null;
+        if(dept == null){
+            department=new Department();
+            department.setName(departmentDTO.getDepartmentName());
+            department.setDescription(departmentDTO.getDepartmentDescription());
+            department=departmentRepository.save(department);
+        }else{
+            department=dept;
+        }
+        return department;
     }
 
     //update
-    public Dept updateDept(DepartmentDTO dto, Integer dId){
-        Dept dept = repo.findById(dId).get();
-        dept.setDName(dto.getDName());
-        return repo.save(dept);
+    @Override
+    public Department updateDepartment(DepartmentDTO departmentDTO){
+        Optional<Department> opt = departmentRepository.findById(departmentDTO.getDepartmentId());
+        Department dept=null;
+        if(opt.isPresent()){
+            dept=opt.get();
+        }
+        dept.setName(departmentDTO.getDepartmentName());
+        dept.setDescription(departmentDTO.getDepartmentDescription());
+        return departmentRepository.save(dept);
     }
-
-
-
-
-    //get
-    public List<Dept> getDept(){
-        return repo.findAll();
+    //get all department
+    public List<Department> getAllDepartment(){
+        return departmentRepository.findAll();
     }
     //delete
-    public void deleteDept(Integer dId){
-        repo.deleteById(dId);
+    @Override
+    public void deleteDepartment(Integer departmentId){
+        departmentRepository.deleteById(departmentId);
     }
-
+/*
     @Autowired
     private CollegeRepository clgREpo;
     // save
@@ -111,5 +126,5 @@ public class StudentServiceImpl implements StudentService {
     public void deleteClg(Integer clgId){
         clgREpo.deleteById(clgId);
     }
-
+*/
 }

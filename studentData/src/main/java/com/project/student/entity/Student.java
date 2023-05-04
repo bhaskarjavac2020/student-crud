@@ -1,7 +1,5 @@
 package com.project.student.entity;
 
-import com.project.student.College.clg.Clg;
-import com.project.student.dept.dept.Dept;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -20,10 +18,10 @@ public class Student {
     private Date dob;
     @Column(name = "father's_name")
     private String father;
-    @ManyToOne
-    private Dept depts;
-    @ManyToOne
-    private Clg clgs;
-
-
+    @ManyToOne(targetEntity = Department.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "department_id", referencedColumnName = "id")
+    private Department department;
+    @ManyToOne(targetEntity = College.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "college_id", referencedColumnName = "id")
+    private College college;
 }

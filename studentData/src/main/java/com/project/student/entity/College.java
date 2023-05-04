@@ -7,7 +7,7 @@ import java.util.List;
 
 @Entity
 @Data
-@Table(name = "college_Table")
+@Table(name = "college")
 public class College {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,6 +16,4 @@ public class College {
     private String name;
     @Column(name = "description")
     private String description;
-    @OneToMany(mappedBy = "clgs")
-    private List<Student> studentc;
 }

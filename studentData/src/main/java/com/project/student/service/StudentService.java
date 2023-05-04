@@ -10,7 +10,8 @@ import com.project.student.entity.Student;
 import java.util.List;
 
 public interface StudentService {
-    ///save
+    /*
+    //save
     public Student saveStudent(StudentDTO studentDTO);
     //update
     public Student updateStudent(StudentDTO studentDTO);
@@ -18,23 +19,24 @@ public interface StudentService {
     public List<Student> getStudent();
     //delete
     public void deleteStudent(Integer dId);
-    //department
-    ///save
+     */
+    //save department
     public Department saveDepartment(DepartmentDTO departmentDTO);
-    //update
+    //update department
     public Department updateDepartment(DepartmentDTO departmentDTO);
-    //get
+    //get department list
     public List<Department> getAllDepartment();
     //delete
-    public void deleteDept(Integer departmentId);
-    //college
-    //save
+    public void deleteDepartment(Integer departmentId);
+    /*
+    //save college
     public College saveCollege(CollegeDTO collegeDTO);
-    //update
+    //update college
     public College updateCollege(CollegeDTO collegeDTO);
-    //get
+    //get college list
     public List<College> getAllCollege();
-    //delete
+    //delete college
     public void deleteClg(Integer collegeId);
+     */
 
 }

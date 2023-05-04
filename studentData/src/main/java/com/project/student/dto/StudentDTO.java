@@ -9,4 +9,6 @@ public class StudentDTO {
     private String name;
     private Date dob;
     private String father;
+    private String departmentName;
+    private String collegeName;
 }
